@@ -85,9 +85,11 @@ bool FlightTaskAutoMapper::update()
 	} else if (_type == WaypointType::velocity) {
 		_generateVelocitySetpoints();
 	}
-
-	_obstacle_avoidance.injectAvoidanceSetpoints(_position_setpoint, _velocity_setpoint, _yaw_setpoint,
-			_yawspeed_setpoint);
+    //PX4_WARN("_obstacle_avoidance is working1");
+    if (_type == WaypointType::land) {
+        _obstacle_avoidance.injectAvoidanceSetpoints(_position_setpoint, _velocity_setpoint, _yaw_setpoint,
+                                                     _yawspeed_setpoint);
+    }
 
 	// during mission and reposition, raise the landing gears but only
 	// if altitude is high enough

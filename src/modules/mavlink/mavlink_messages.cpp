@@ -3607,6 +3607,7 @@ protected:
 			}
 
 			msg.valid_points = number_valid_points;
+			//msg.command[0]=21;
 
 			mavlink_msg_trajectory_representation_waypoints_send_struct(_mavlink->get_channel(), &msg);
 

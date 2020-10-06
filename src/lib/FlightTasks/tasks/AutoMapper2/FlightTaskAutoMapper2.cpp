@@ -91,10 +91,14 @@ bool FlightTaskAutoMapper2::update()
 		break;
 	}
 
-	_obstacle_avoidance.injectAvoidanceSetpoints(_position_setpoint, _velocity_setpoint, _yaw_setpoint,
-			_yawspeed_setpoint);
+    _generateSetpoints();
+	//PX4_WARN("_obstacle_avoidance is working2");
+    if (_type == WaypointType::land) {
+		_obstacle_avoidance.injectAvoidanceSetpoints(_position_setpoint, _velocity_setpoint, _yaw_setpoint,
+													 _yawspeed_setpoint);
+	}
 
-	_generateSetpoints();
+
 
 	// during mission and reposition, raise the landing gears but only
 	// if altitude is high enough

@@ -243,8 +243,10 @@ MavlinkReceiver::handle_message(mavlink_message_t *msg)
 		handle_message_obstacle_distance(msg);
 		break;
 
-	case MAVLINK_MSG_ID_TRAJECTORY_REPRESENTATION_WAYPOINTS:
+	case MAVLINK_MSG_ID_TRAJECTORY_REPRESENTATION_WAYPOINTS: {
+		//PX4_WARN("px4 receive trajectory waypoints");
 		handle_message_trajectory_representation_waypoints(msg);
+	}
 		break;
 
 	case MAVLINK_MSG_ID_NAMED_VALUE_FLOAT:
@@ -1663,7 +1665,7 @@ MavlinkReceiver::handle_message_trajectory_representation_waypoints(mavlink_mess
 
 	trajectory_waypoint.timestamp = hrt_absolute_time();
 	const int number_valid_points = trajectory.valid_points;
-
+	//PX4_WARN("number_valid_points:%d",number_valid_points);
 	for (int i = 0; i < vehicle_trajectory_waypoint_s::NUMBER_POINTS; ++i) {
 		trajectory_waypoint.waypoints[i].position[0] = trajectory.pos_x[i];
 		trajectory_waypoint.waypoints[i].position[1] = trajectory.pos_y[i];
@@ -1679,6 +1681,8 @@ MavlinkReceiver::handle_message_trajectory_representation_waypoints(mavlink_mess
 
 		trajectory_waypoint.waypoints[i].yaw = trajectory.pos_yaw[i];
 		trajectory_waypoint.waypoints[i].yaw_speed = trajectory.vel_yaw[i];
+
+		//PX4_WARN("pos_z:%f",(double)trajectory.pos_z[i] );
 
 	}
 

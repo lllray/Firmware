@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<mavlink>
+    <version>3</version>
+    <enums>
+    </enums>
+    <messages>
+        <message id="400" name="VISUAL_LOCATION">
+        <description>Type of landing target</description>
+        <field type="float" name="x" units="m">X Position of the landing target on NED_FRAME</field>
+        <field type="float" name="y" units="m">Y Position of the landing target on NED_FRAME</field>
+        <field type="float" name="z" units="m">Z Position of the landing target on NED_FRAME</field>
+        <field type="float" name="roll" units="rad">roll of the landing target on NED_FRAME</field>
+        <field type="float" name="pitch" units="rad">pitch of the landing target on NED_FRAME</field>
+        <field type="float" name="yaw" units="rad">yaw of the landing target on NED_FRAME</field>
+        </message>
+        <message id="401" name="MARKER_LOCATION">
+        <description>Type of marker location</description>
+        <field type="uint64_t" name="time_usec" units="us">Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since 1.1.1970 or since system boot) by checking for the magnitude the number.</field>
+        <field type="float" name="x" units="m">X Position of the marker location on NED_FRAME</field>
+        <field type="float" name="y" units="m">Y Position of the marker location on NED_FRAME</field>
+        <field type="float" name="z" units="m">Z Position of the marker location on NED_FRAME</field>
+        <field type="float" name="roll" units="rad">roll of the marker location on NED_FRAME</field>
+        <field type="float" name="pitch" units="rad">pitch of the marker location on NED_FRAME</field>
+        <field type="float" name="yaw" units="rad">yaw of the marker location on NED_FRAME</field>
+        </message>
+    </messages>
+
+</mavlink>

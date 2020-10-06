@@ -93,14 +93,26 @@ void ObstacleAvoidance::injectAvoidanceSetpoints(Vector3f &pos_sp, Vector3f &vel
 		// if avoidance disabled or in failsafe nav_state LOITER, don't inject setpoints from avoidance system
 		return;
 	}
+   // PX4_WARN("nav_state:%d",(int)_sub_vehicle_status->get().nav_state);
+	if(_sub_vehicle_trajectory_waypoint==nullptr)PX4_WARN("_sub_vehicle_trajectory_waypoint is null");
 
 	const bool avoidance_data_timeout = hrt_elapsed_time((hrt_abstime *)&_sub_vehicle_trajectory_waypoint->get().timestamp)
 					    > TRAJECTORY_STREAM_TIMEOUT_US;
-	const bool avoidance_point_valid =
-		_sub_vehicle_trajectory_waypoint->get().waypoints[vehicle_trajectory_waypoint_s::POINT_0].point_valid == true;
+    const bool avoidance_point_valid =
+            _sub_vehicle_trajectory_waypoint->get().waypoints[vehicle_trajectory_waypoint_s::POINT_0].point_valid == true;
 
-	if (avoidance_data_timeout || !avoidance_point_valid) {
-		PX4_WARN("Obstacle Avoidance system failed, loitering");
+	//PX4_WARN("avoidance_data_timeout: %d avoidance_point_valid: %d",avoidance_data_timeout,avoidance_point_valid);
+    //PX4_WARN("time: %d avoidance_point_valid: %d %d %d",(int)hrt_elapsed_time((hrt_abstime *)&_sub_vehicle_trajectory_waypoint->get().timestamp)
+    //,(int)_sub_vehicle_trajectory_waypoint->get().waypoints[vehicle_trajectory_waypoint_s::POINT_0].point_valid,
+    //         (int)_sub_vehicle_trajectory_waypoint->get().waypoints[vehicle_trajectory_waypoint_s::POINT_1].point_valid,
+     //        (int)_sub_vehicle_trajectory_waypoint->get().waypoints[vehicle_trajectory_waypoint_s::POINT_2].point_valid);
+
+    //Vector3f temp=_sub_vehicle_trajectory_waypoint->get().waypoints[vehicle_trajectory_waypoint_s::POINT_0].position;
+    //float xxx=temp(0);
+    //PX4_WARN("%f",(double)xxx );
+
+    if (avoidance_data_timeout || !avoidance_point_valid) {
+		//PX4_WARN("Obstacle Avoidance system failed, loitering");
 		_publishVehicleCmdDoLoiter();
 
 		if (!PX4_ISFINITE(_failsafe_position(0)) || !PX4_ISFINITE(_failsafe_position(1))
