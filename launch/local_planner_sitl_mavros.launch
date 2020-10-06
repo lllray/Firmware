@@ -1,13 +1,11 @@
 <launch>
    <param name="use_sim_time" value="true" />
 
-   <!-- <arg name="world_path" default="$(find local_planner)/../avoidance/sim/worlds/outdoor_village_3.world" />-->
-  <!-- <arg name="world_path" default="$(find mavlink_sitl_gazebo)/worlds/empty.world"/>-->
-    <arg name="world_path" default="$(find mavlink_sitl_gazebo)/worlds/empty_world_0620.world"/>
+    <arg name="world_path" default="$(find mavlink_sitl_gazebo)/worlds/empty.world"/>
     <arg name="headless" default="false"/>
-    <arg name="gui" default="false"/>
+    <arg name="gui" default="true"/>
     <arg name="ns" default="/"/>
-    <arg name="model" default="iris_depth_camera"/>
+    <arg name="model" default="iris_fpv_cam"/>
     <arg name="build" default="px4_sitl_default"/>
     <arg name="fcu_url" default="udp://:14540@localhost:14557"/>
     <arg name="gcs_url" default="" />   <!-- GCS link is provided by SITL -->
@@ -26,7 +24,7 @@
 
     <!-- Launch PX4 SITL -->
     <include file="$(find px4)/launch/px4.launch">
-        <arg name="vehicle" default="iris_obs_avoid"/>
+        <arg name="vehicle" default="iris"/>
     </include>
 
     <!-- Launch MavROS -->
