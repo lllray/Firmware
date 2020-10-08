@@ -1,7 +1,7 @@
 <launch>
    <param name="use_sim_time" value="true" />
 
-    <arg name="world_path" default="$(find mavlink_sitl_gazebo)/worlds/empty.world"/>
+    <arg name="world_path" default="$(find mavlink_sitl_gazebo)/worlds/test_city_4.world"/>
     <arg name="headless" default="false"/>
     <arg name="gui" default="true"/>
     <arg name="ns" default="/"/>
