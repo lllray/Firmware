@@ -19,9 +19,9 @@
     <arg name="P" default="0"/>
     <arg name="Y" default="0"/>
 
-    <!-- Launch rqt_reconfigure
+    <!-- Launch rqt_reconfigure -->
     <node pkg="rqt_reconfigure" type="rqt_reconfigure" output="screen" name="rqt_reconfigure" />
-    -->
+
     <!-- Launch PX4 SITL -->
     <include file="$(find px4)/launch/px4.launch">
         <arg name="vehicle" default="iris"/>
@@ -31,7 +31,7 @@
     <group ns="$(arg ns)">
         <include file="$(find mavros)/launch/node.launch">
             <arg name="pluginlists_yaml" value="$(find mavros)/launch/px4_pluginlists.yaml" />
-            <arg name="config_yaml" value="$(find mavros)/launch/px4_config.yaml" />
+            <arg name="config_yaml" value="$(find local_planner)/../avoidance/resource/px4_config.yaml" />
             <arg name="fcu_url" value="$(arg fcu_url)" />
             <arg name="gcs_url" value="$(arg gcs_url)" />
             <arg name="tgt_system" value="$(arg tgt_system)" />
