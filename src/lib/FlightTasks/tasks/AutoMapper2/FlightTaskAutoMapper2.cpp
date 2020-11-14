@@ -91,8 +91,11 @@ bool FlightTaskAutoMapper2::update()
 		break;
 	}
 
-	_obstacle_avoidance.injectAvoidanceSetpoints(_position_setpoint, _velocity_setpoint, _yaw_setpoint,
-			_yawspeed_setpoint);
+	PX4_INFO("WaypointType:%d",(int)_type);
+	if(_type==WaypointType::position) {
+        _obstacle_avoidance.injectAvoidanceSetpoints(_position_setpoint, _velocity_setpoint, _yaw_setpoint,
+                                                     _yawspeed_setpoint);
+    }
 
 	_generateSetpoints();
 
