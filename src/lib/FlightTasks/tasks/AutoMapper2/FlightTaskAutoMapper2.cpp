@@ -92,7 +92,7 @@ bool FlightTaskAutoMapper2::update()
 	}
 
 	PX4_INFO("WaypointType:%d",(int)_type);
-	if(_type==WaypointType::position) {
+	if(_type!=WaypointType::takeoff&&_type!=WaypointType::land) {
         _obstacle_avoidance.injectAvoidanceSetpoints(_position_setpoint, _velocity_setpoint, _yaw_setpoint,
                                                      _yawspeed_setpoint);
     }
